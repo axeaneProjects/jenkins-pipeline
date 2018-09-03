@@ -1,13 +1,13 @@
 def CONTAINER_NAME="jenkins-pipeline"
 def CONTAINER_TAG="latest"
-def DOCKER_HUB_USER="hakdogan"
+def DOCKER_HUB_USER="imcsdocker"
 def HTTP_PORT="8090"
 
 node {
 
     stage('Initialize'){
-        def dockerHome = tool 'myDocker'
-        def mavenHome  = tool 'myMaven'
+        def dockerHome = tool 'AX_DOCKER'
+        def mavenHome  = tool 'AX_MAVEN'
         env.PATH = "${dockerHome}/bin:${mavenHome}/bin:${env.PATH}"
     }
 
@@ -36,7 +36,7 @@ node {
     }
 
     stage('Push to Docker Registry'){
-        withCredentials([usernamePassword(credentialsId: 'dockerHubAccount', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+        withCredentials([usernamePassword(credentialsId: 'DOCKER-IDENTIFIANT', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
             pushToImage(CONTAINER_NAME, CONTAINER_TAG, USERNAME, PASSWORD)
         }
     }
