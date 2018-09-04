@@ -21,7 +21,7 @@ node {
 
     stage('Sonar'){
         try {
-            sh "mvn sonar:sonar"
+            sh "mvn sonar:sonar -Dsonar.login=jenkins -Dsonar.password=issam_706011"
         } catch(error){
             echo "The sonar server could not be reached ${error}"
         }
